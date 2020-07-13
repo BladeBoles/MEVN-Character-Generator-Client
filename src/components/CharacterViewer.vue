@@ -1,31 +1,21 @@
 <template>
   <div class="character-view">
     <h1>Character Viewer</h1>
-    <p>{{ characters }}</p>
+    <p v-for="(character, index) in characters" v-bind:key="index">
+      {{ character.name }} is a {{ character.profession }}.
+    </p>
   </div>
 </template>
 
 <script>
-  import axios from 'axios';
-
   export default {
     name: 'CharacterViewer',
-    data: function() {
-      return {
-        characters: null
-      }
-  },
-  methods: {
-    getCharacters: function() {
-      axios
-        .get('http://localhost:3000/characters')
-        .then(response => (this.characters = response.data))
+    props: {
+      characters: Array
     }
-    },
-  mounted: function () {
-    this.getCharacters();
   }
-}
+
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
